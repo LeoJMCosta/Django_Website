@@ -5,13 +5,43 @@ from django.utils.text import slugify
 # Create your models here.
 
 
-class Post(models.Model):
-    pass
-
-
 class Author(models.Model):
-    pass
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email_adddress = models.EmailField(_(""), max_length=254)
+
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
+
+    class Meta:
+        verbose_name_plural = "Authors"
+
+
+class Post(models.Model):
+    title = models.CharField(max_length=100)
+    excerpt = models.CharField(max_length=200)
+    image = ""
+    date = ""
+    slug = models.SlugField(default="", blank=True,
+                            null=False, db_index=True)
+    author = models.ForeignKey(
+        Author, on_delete=models.CASCADE, null=True, related_name="posts")
+    content = models.CharField
+
+    def get_absolute_url(self):
+        return reverse("book_detail", args=[self.slug])
+
+    def __str__(self):
+        return f"{self.title} ({self.author})"
+
+    class Meta:
+        verbose_name_plural = "Posts"
 
 
 class Tag(models.Model):
-    pass
+    caption = models.CharField(max_length=100)
+
+    post_tags = models.ManyToManyField(Post, null=False)
+
+    class Meta:
+        verbose_name_plural = "Tags"
