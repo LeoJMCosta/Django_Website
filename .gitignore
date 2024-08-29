@@ -61,3 +61,7 @@ dmypy.json
 
 # Ignore settings.py in the my_site directory
 my_site/settings.py
+
+# Ignore the zipped file
+
+code.zip
