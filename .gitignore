@@ -57,3 +57,7 @@ coverage.xml
 .mypy_cache/
 .dmypy.json
 dmypy.json
+
+
+# Ignore settings.py in the my_site directory
+my_site/settings.py
