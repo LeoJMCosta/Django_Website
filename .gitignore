@@ -33,6 +33,7 @@ env/
 .env/
 env.bak/
 venv.bak/
+django_my_site
 
 # Test artifacts
 .tox/
